@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgh.main.admin.mapper.SystemPayConfigMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.dgh.main.admin.entity.SystemPayConfig">
+        <id column="id" property="id" />
+        <result column="mch_code" property="mchCode" />
+        <result column="appid" property="appid" />
+        <result column="mch_id" property="mchId" />
+        <result column="cert_path" property="certPath" />
+        <result column="paterner_key" property="paternerKey" />
+        <result column="client_ip" property="clientIp" />
+        <result column="pay_notify_url" property="payNotifyUrl" />
+        <result column="refund_notify_url" property="refundNotifyUrl" />
+        <result column="version" property="version" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, mch_code, appid, mch_id, cert_path, paterner_key, client_ip, pay_notify_url, refund_notify_url, version
+    </sql>
+
+</mapper>

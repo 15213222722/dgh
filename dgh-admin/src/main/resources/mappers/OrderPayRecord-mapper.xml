@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgh.main.admin.mapper.OrderPayRecordMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.dgh.main.admin.entity.OrderPayRecord">
+        <id column="id" property="id" />
+        <result column="pay_config_id" property="payConfigId" />
+        <result column="pay_way" property="payWay" />
+        <result column="pay_type" property="payType" />
+        <result column="pay_method" property="payMethod" />
+        <result column="order_no" property="orderNo" />
+        <result column="third_order_no" property="thirdOrderNo" />
+        <result column="product_code" property="productCode" />
+        <result column="total_amount" property="totalAmount" />
+        <result column="order_title" property="orderTitle" />
+        <result column="order_desc" property="orderDesc" />
+        <result column="extends_content" property="extendsContent" />
+        <result column="pay_status" property="payStatus" />
+        <result column="pay_status_desc" property="payStatusDesc" />
+        <result column="pay_finish_time" property="payFinishTime" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="version" property="version" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, pay_config_id, pay_way, pay_type, pay_method, order_no, third_order_no, product_code, total_amount, order_title, order_desc, extends_content, pay_status, pay_status_desc, pay_finish_time, create_time, update_time, version
+    </sql>
+
+</mapper>

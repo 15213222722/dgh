@@ -1,0 +1,95 @@
+server: 
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 300
+    min-spare-threads: 100
+  port: 8088
+  connection-timeout: 10000ms
+  servlet:
+    context-path: /
+    
+spring: 
+  devtools:
+    livereload:
+      enabled: true
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3307/clt-3.0.0-plugin?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false
+    username: root
+    password: 123456
+    filters: stat
+    maxActive: 150
+    initialSize: 5
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+  aop:
+    proxy-target-class: true 
+  rabbitmq:
+    host: 192.168.0.6
+    port: 5672
+    username: admin
+    password: abc123cde
+    #连接到RabbitMQ的虚拟主机
+    #virtual-host: 
+    publisher-confirms: true
+    listener:
+    #并发消费者的初始化值
+      concurrency: 10
+      #并发消费者的最大值
+      max-concurrency: 20
+      #每个消费者每次监听时可拉取处理的消息数量
+      prefetch: 5
+  dubbo:
+    application: 
+      name: springboot-dubbo-provider 
+    registry:
+      address: zookeeper://192.168.0.6:2181
+    protocol: 
+      name: dubbo 
+      port: 20880
+    scan: com.dgh.main.admin.dubbo.service
+  cache: 
+    type: redis
+  redis: 
+    host: 192.168.0.6
+    port: 6379
+    jedis:
+      pool:
+        max-idle: 8
+        max-active: 8
+        max-wait: 3000
+    timeout: 3000
+    password: 123456
+    
+  #redis配置,cluster集群版
+#  redis: 
+#    cluster:
+#      nodes: 172.19.0.63:6379
+#    #注意：密码含有特殊字符必须要用引号包含起来
+#    password: "*YHN7ujmsdfouo_3123"
+#    timeout: 5000
+#    soTimeout: 5000
+#    maxAttempts: 3
+#    jedis:
+#      pool:
+#        max-active: 128
+#        max-idle: 128
+#        max-wait: -1
+#        max-total: -1
+#        max-redirects: 3
+#        testOnBorrow: true
+#        testOnReturn: true
+      
+mybatis-plus:
+  mapper-locations: classpath:mappers/**/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
