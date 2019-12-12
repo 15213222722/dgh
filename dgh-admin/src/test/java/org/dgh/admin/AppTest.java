@@ -6,9 +6,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 import javax.annotation.Resource;
 
+import org.apache.dubbo.config.annotation.Reference;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.amqp.AmqpException;
@@ -18,6 +20,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -49,9 +52,11 @@ public class AppTest {
 
 	/**
 	 * 测试service
+	 * @throws Exception 
 	 */
-//	@Test
-	public void testService() {
+	@Test
+	@Transactional
+	public void testService() throws Exception {
 		OrderPayRecord orderPayRecord = new OrderPayRecord();
 		orderPayRecord.setCreateTime(LocalDateTime.now());
 		orderPayRecord.setOrderDesc("订单描述");
@@ -68,7 +73,6 @@ public class AppTest {
 		orderPayRecord.setUpdateTime(LocalDateTime.now());
 		orderPayRecord.setVersion(0);
 		boolean flag = orderPayRecordService.save(orderPayRecord);
-		
 		//乐观锁测试
 		OrderPayRecord order = new OrderPayRecord();
 //		order.setId(orderPayRecord.getId());
@@ -78,7 +82,7 @@ public class AppTest {
 		updateWrapper.eq("id", orderPayRecord.getId());
 		orderPayRecordService.update(order, updateWrapper);
 		
-		System.out.println("------" + orderPayRecord.getId());
+//		System.out.println("------" + orderPayRecord.getId());
 //		orderPayRecord.setOrderTitle("我是订单22");
 //		UpdateWrapper<OrderPayRecord> wrapper = new UpdateWrapper<OrderPayRecord>();
 //		wrapper.eq("order_no", "6589898998");
@@ -90,7 +94,6 @@ public class AppTest {
 //		});
 //		boolean flag = orderPayRecordService.update(orderPayRecord,wrapper);
 		System.out.println(flag);
-//		Assert.isTrue(flag, "保存失败", "抛出异常");
 	}
 	
 	/**
@@ -140,7 +143,7 @@ public class AppTest {
 		// -------------延时发送-----------
 	}
 
-	@Resource
+	@Reference(version = "1.0.0")
 	PayRpcService payRpcService;
 	
 	/**
@@ -169,7 +172,7 @@ public class AppTest {
 	/**
 	 * 测试自定义sql
 	 */
-	@Test
+//	@Test
 	public void testMySql() {
 		OrderPayRecord order = orderPayRecordService.selectByOrderNo("6589898998");
 		System.out.println(JSON.toJSONString(order));
