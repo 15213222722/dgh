@@ -59,6 +59,7 @@ public class OrderPayRecordController {
 		orderPayRecord.setOrderNo("888888a8ddd");
 		orderPayRecord.setVersion(order.getVersion());
 		orderPayRecordService.updateById(orderPayRecord);
+		//抛出异常
 		int a = 1/0;
 		return ResultBody.success();
 	}
